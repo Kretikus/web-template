@@ -9,6 +9,18 @@ function DBconnect() {
     return true;
 }
 
+function DBgetCurrentVersion() {
+	global $db;
+	$sql = "SELECT version from scheme_version where name='db'";
+	$row = $db->query($sql)->fetch();
+	return $row['version']; 
+}
+
+function DBsetCurrentVersion($version) {
+	global $db;
+	$db->exec("UPDATE scheme_version SET version=" . $version . " WHERE name='db'");
+}
+
 function DBgetSaltAndHash($login) {
     global $db;
     $retval[0] = "";
