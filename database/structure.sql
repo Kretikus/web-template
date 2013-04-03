@@ -1,7 +1,7 @@
 -- Version 1
 
 CREATE TABLE scheme_version (name VARCHAR(20) UNIQUE, version INT);
-CREATE TABLE users (id INT PRIMARY KEY,
+CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     login VARCHAR(255) NOT NULL,
                     firstname VARCHAR(255) NOT NULL,
                     surname VARCHAR(255) NOT NULL,
