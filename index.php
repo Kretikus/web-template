@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+function isAuthenticated()
+{
+	return isset($_SESSION['is_authenticated']) && $_SESSION['is_authenticated'] == 1;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -11,12 +20,12 @@
 </head>
 <body>
 
-<div class="navbar" style="display:none">
+<div class="navbar" style="<?php if (!isAuthenticated()) echo "display:none"?>">
   <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="#">Project name</a>
         <ul class="nav pull-right">
-          <li><a href="#admin">Admin</a></li>
+          <li><a id="admin-button"  href="#admin">Admin</a></li>
         </ul>
     </div>
   </div>
@@ -24,7 +33,7 @@
 
  <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" style="<?php if (isAuthenticated()) echo "display:none"?>" >
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" class="input-block-level" placeholder="Email address">
         <input type="password" class="input-block-level" placeholder="Password">
@@ -37,7 +46,7 @@
     </div> <!-- /container -->
 
 
-<div id="content" style="display:none">
+<div id="content" style="<?php if (!isAuthenticated()) echo "display:none"?>">
 <h1>Bootstrap starter template</h1>
   <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
 </div>

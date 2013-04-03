@@ -51,13 +51,12 @@ require([
         });
     });
 
-/*
-$('.form-signin').hide();
-$('.navbar').show();
-//$('#content').show();
-$('#admin').show();
+	$('#admin-button').bind('click', function(e) {
+		console.log("TADA!");
+		$('#content').hide();
+		$('#admin').show();
+		Admin.populateUserList();
+	});
 
-Admin.populateUserList();
-*/
 
 });

@@ -18,4 +18,10 @@ INSERT INTO users VALUES (0, 'roman', 'roman', 'himmes', 'roman@himmes.com',
                           '05f1f29dadc4e70a425321bf20bf2e5c9bcc6af73f732471cf62d43d390f0b65 ',
                           '1234567890', 1, 0);
 
+-- Version 2
+
+
+-- Version 255
+
+
 -- EOF
