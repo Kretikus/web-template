@@ -4,10 +4,20 @@ session_start();
 require('etc/config.php');
 require('database/sql.php');
 
+// FLAGS
+$USER_NEEDS_PWDCHANGE = 1;
+
+
 function jsonReply($data)
 {
     header('Content-type: application/json');
     echo json_encode($data);
+}
+
+function sendLoginDataToEmail($email, $password) {
+	$file = fopen('/home/roman/test/user.data', 'a+');
+	fwrite($file, "EMail: ".$email." ".$password);
+	fclose($file);
 }
 
 function serverTimeInTolerance($srvTimeAsString)
@@ -77,11 +87,15 @@ else if ($signature == 'addUser') {
     $retval = array();
     $retval['result'] = 0;
     if (DBconnect()) {
+		$password = substr(md5(rand()), 0, 8);
         $user = $values['params'];
-        $user['pwdSalt'] = "";
-        $user['pwdHash'] = "";
-        $user['flags']   = 0;
-        if (DBaddUser($user)) $retval['result'] = 1;
+        $user['pwdSalt'] = substr(md5(rand()), 0, 12);
+        $user['pwdHash'] = hash_hmac('sha256', $user['pwdSalt'], $password);
+        $user['flags']   = $USER_NEEDS_PWDCHANGE;  
+        if (DBaddUser($user)) {
+			 $retval['result'] = 1;
+			sendLoginDataToEmail($user['email'], $password);
+		}
     }
     jsonReply($retval);
 }
