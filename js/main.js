@@ -15,9 +15,10 @@ require([
     'jquery',
     'Rmi',
     'Admin',
+    'Router',
     '../vendor/crypto/sha256',
     'bootstrap'
-], function($, RMI, Admin, Hash) {
+], function($, RMI, Admin, Router, Hash) {
 
     $('.form-signin button').bind('click', function(e) {
         e.preventDefault();
@@ -28,14 +29,14 @@ require([
 
         RMI.getSalt(username, function(status, data) {
             console.log(data);
-	    var salt       = data.salt;
-	    var servertime =  "" + data.servertime;
+        var salt       = data.salt;
+        var servertime =  "" + data.servertime;
 
             if (salt.length == 0) {
                 $('.form-signin-msg').show();
                 return;
             }
-	
+
             var hash = Hash.hmac(Hash.hmac(password, salt), servertime);
             RMI.login(username, hash, servertime, function(status, result) {
                     if (result == 0) {
@@ -50,13 +51,17 @@ require([
             );
         });
     });
+    
+    Router.registerRoute('admin', function() {
+        console.log('admin route triggered!');
+    });
 
-	$('#admin-button').bind('click', function(e) {
-		console.log("TADA!");
-		$('#content').hide();
-		$('#admin').show();
-		Admin.populateUserList();
-	});
+//	$('#admin-button').bind('click', function(e) {
+//		console.log("TADA!");
+//		$('#content').hide();
+//		$('#admin').show();
+//		Admin.populateUserList();
+//	});
 
 
 });

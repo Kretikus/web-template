@@ -17,6 +17,15 @@ function isAuthenticated()
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap-responsive.min.css">
+
+<script type="text/javascript">
+    var serverLog = function() {};
+    <!-- IE workaround, in case that vendor libs use console.log -->
+    if (typeof console !== 'object') console = {};
+    if (typeof console.log === 'undefined') console.log = function() {};
+    if (typeof console.info === 'undefined') console.info = function() {};
+</script>
+
 </head>
 <body>
 

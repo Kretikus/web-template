@@ -1,5 +1,5 @@
 OTHER_FILES += \
-    index.html \
+    index.php \
     css/main.css \
 
 OTHER_FILES += \
@@ -7,6 +7,7 @@ OTHER_FILES += \
     js/Ajax.js \
     js/main.js \
     js/Rmi.js \
+    js/Router.js \
 
 OTHER_FILES += \
     rmi.php \
@@ -21,7 +22,4 @@ OTHER_FILES += \
     vendor/crypto/sha512.js \
     vendor/crypto/ripemd160.js \
     vendor/crypto/md5.js
-
-
-
 
